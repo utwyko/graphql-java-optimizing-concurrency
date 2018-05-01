@@ -38,8 +38,8 @@ class GraphQLService {
 }
 
 private val productDataFetcher: DataFetcher<CompletableFuture<Product>> = DataFetcher {
-    println("Fetching product")
     CompletableFuture.supplyAsync {
+        println("Fetching product ${System.currentTimeMillis()}")
         Thread.sleep(1000)
         Product("id", null)
     }
@@ -47,14 +47,15 @@ private val productDataFetcher: DataFetcher<CompletableFuture<Product>> = DataFe
 
 private val offerDataFetcher: DataFetcher<CompletableFuture<Offer>> = DataFetcher {
     CompletableFuture.supplyAsync {
-        println("Fetching offer")
+        println("Fetching offer ${System.currentTimeMillis()}")
         Offer("$4")
     }
 }
 
 private val summariesDataFetcher: DataFetcher<CompletableFuture<Summaries>> = DataFetcher {
     CompletableFuture.supplyAsync {
-        println("Fetching summaries")
+        println("Fetching summaries ${System.currentTimeMillis()}")
+        Thread.sleep(1000)
         Summaries("small summary")
     }
 }

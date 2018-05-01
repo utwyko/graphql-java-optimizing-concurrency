@@ -1,16 +1,19 @@
 package nl.wykorijnsburger.graphqljavaoptimizingconcurrency
 
+import graphql.ExecutionInput
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class GraphQLServiceTest {
 
-    @Test(timeout = 1000)
+    @Test
     fun `Should call product and offer concurrently`() {
         val graphQLService = GraphQLService()
 
-        val result = graphQLService.graphQL.execute(
-            """
+        val result = graphQLService.graphQL.executeAsync(
+            ExecutionInput.newExecutionInput()
+                .query(
+                    """
 {
   product(id : "123") {
     id
@@ -24,7 +27,10 @@ class GraphQLServiceTest {
   }
 }
             """
+                )
+                .build()
         )
+            .get()
 
         assertThat(result).isNotNull
     }
