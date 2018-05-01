@@ -1,0 +1,22 @@
+schema {
+    query: QueryType
+}
+
+type QueryType {
+    product(id: String) : Product
+}
+
+type Product {
+    id: String!
+    title: String
+    offer: Offer
+    summaries: Summaries
+}
+
+type Offer {
+    price: String
+}
+
+type Summaries {
+    small: String
+}
